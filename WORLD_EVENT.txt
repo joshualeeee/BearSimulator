@@ -1,0 +1,72 @@
+Virtual World Project
+Joshua Lee, Misaki Tanabe
+CSC 203, Fall '22
+
+1. The event is triggered when the mouseIsClicked.
+
+2. When event is triggered a HiveDown entity spawns where mouse was clicked and a beeNotFull entity spawns next to it.
+
+   The event also triggers the change of 5 background spaces surrounding the point clicked.
+3. The affected entity is the FlowerFull entity. Before event is triggered FlowerFull will remain as FlowerFull. The event spawns
+   a beeNotFull that navigates to nearest FlowerFull, decrements its health, and transforms it to FlowerSapling.
+ FlowerFull
+    * animates and has health
+    * Its health can be depleted if adjacent to bear entity or bee entity,
+      when health is depleted it will transform into a FlowerSapling entity
+
+4. The new entities are HiveDown and beeNotFull.
+ HiveDown
+    * Spawns on whenMouseClicked
+    * animates and grows into HiveUp entities once they hit their designated health limit
+    * Bees will not navigate towards HiveDowns only HiveUp
+ Bee_NotFull
+     * Utilizes A* to navigate to nearest FlowerFull
+     * will search until it has reached its resource limit,
+       moving to multiple FlowerFulls if necessary.
+     * transforms into a Bee_Full once it hits its resource limit (Bee_NotFull -> Bee_Full)
+
+5. Work between partners was split evenly as we both worked on similar parts at the same time.
+
+
+
+Simulation Rules:
+There are 8 entities, which act according to the following rules:
+1. Bear:
+    * Just one entity.
+    * Controlled by the arrow keys.
+    * Whenever the camera moves it follows bear entity so that it stays as centered as possible.
+    * Whenever stomps on hive or flower whenever adjacent (hiveUP -> hiveDown, flowerFull -> flowerSapling)
+
+2. Bee_Full
+    * Spawns on whenMouseClicked
+    * Is a flower harvesting entity who has already collected as much pollen as they can carry.
+    * Utilizes A* to navigate to the nearest HiveUp to drop it off.
+    * Transforms into a Bee_NotFull once task is completed (Bee_Full -> Bee_NotFull)
+
+3. Bee_NotFull
+    * Utilizes A* to navigate to nearest FlowerFull
+    * will search until it has reached its resource limit,
+      moving to multiple FlowerFulls if necessary.
+    * transforms into a Bee_Full once it hits its resource limit (Bee_NotFull -> Bee_Full)
+
+4. OBSTACLE
+    * the water - entities cannot move through it
+    * the water is not just a background image as it blocks entity paths
+
+5. HiveDown
+    * Spawns on whenMouseClicked
+    * animates and grows into HiveUp entities once they hit their designated health limit
+    * Bees will not navigate towards HiveDowns only HiveUp
+
+6. HiveUp
+    * animates and has health
+    * Its health can be depleted if adjacent to bear entity,
+     when health is depleted it will transform into a HiveDown entity
+
+7. FlowerSapling
+    * FlowerSaplings animate and grow into FlowerFull entities once they hit their designated health limit
+
+8. FlowerFull
+    * animates and has health
+   * Its health can be depleted if adjacent to bear entity or bee entity,
+      when health is depleted it will transform into a FlowerSapling entity
